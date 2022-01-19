@@ -19,9 +19,9 @@ $connectdb;
 
 		$execute = $stmt->execute();
 	if($execute){
-		$mesaj="You have successfully subscribed to our newsletter!";
+		$mesaj="You have been subscribed to our mailing list.";
 	} else {
-		$mesaj="There has been a problem, please try again!";
+		$mesaj="There has been a problem, please try again.";
 	}
 }
 
@@ -31,7 +31,7 @@ $connectdb;
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Thank you!</title>
+    <title>Survey app - Thank you</title>
     <meta charset="UTF-8">
 <meta name="Language" content="ro">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,20 +43,21 @@ $connectdb;
     
 </head>
 <body>
-<a href="index.php" class="sigla"><img src="foto/logo.png" alt="sigla" class="fullimg"/></a>
+<a href="index.php" class="sigla"><img src="foto/logo.png" alt="sigla atelier custom web" class="fullimg"/></a>
  
 <div class="full oh panou " id="raspuns" data-name="fin">
-<h1>Thankyou</h1>
-	   <p>Here is your voucher code:</p>
+<h1>Thank you</h1>
+	   <p>We have received your responses and recorded them with number:</p>
 
-<p class="cod">VLO-<?php echo $_SESSION['string']; ?></p>
+<p class="cod"><?php echo $_SESSION['string']; ?></p>
 
-<p>Want to stay in touch?</p>
+<p>Want to be in the loop? Subscribe to our newsletter!</p>
 <form method="post">
-<input type="email" placeholder="Your email" name="inscrierenl" id="inscrierenl" class="inputemail ">
-<input type="submit" class="butonnextchest " id="nl" name="insnl" value="Salveaza" >
+<input type="email" placeholder="Email" name="inscrierenl" id="inscrierenl" class="inputemail ">
+<input type="submit" class="butonnextchest " id="nl" name="insnl" value="Subscribe me" >
 
-<p><?php echo $mesaj; ?></p>
+<p><?php
+echo $mesaj; ?></p>
 </form>
 </div>     
 

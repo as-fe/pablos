@@ -2,18 +2,29 @@ import * as model from "./model.js";
 import initialView from "./views/initialView.js";
 import questionView from "./views/questionView.js";
 
-const locatie = document.querySelector("#locatie"); 
+const locatie = document.querySelector("#locatie");
 const bar = document.querySelector(".bar");
-const checkbox = document.querySelectorAll('input[type = "checkbox"]');
-const next = document.querySelector(".butonnextchest");
 let barinc, checked;
 const ansarray = [];
 
-const displayBut = function () {
+const displayBut = function (event) {
   if (Number(model.state.location) === Number(model.qNo)) {
     displayButFin();
   } else {
     document.querySelector(".butonnextchest").classList.remove("hidden");
+
+    if (document.querySelector(".fileupl") !== null) {
+      document.querySelectorAll(".file").forEach(function (f) {
+        if (f.dataset.extra === "yes" && f.checked === true) {
+          document
+            .querySelector(".fileinput--styler")
+            .classList.remove("hidden");
+        }
+        if (f.dataset.extra === "no" && f.checked === true) {
+          document.querySelector(".fileinput--styler").classList.add("hidden");
+        }
+      });
+    }
   }
 };
 
@@ -50,26 +61,22 @@ const Load = function () {
   document.querySelector("#totalq").textContent = model.qNo;
   updLocation();
 };
-const LoadQ = function () {
-  model.getQInfo("1");
-  questionView.render(model.state.currentQuestion);
-  document.querySelector("#totalq").textContent = model.qNo;
-  updLocation();
-};
 
 const goBack = function () {
   model.getQInfo(`${model.state.location - 1}`);
   questionView.render(model.state.currentQuestion);
   updLocation();
 
-  
+  ansarray.find((el) =>
+    el.substr(0, 3) === `q` + model.state.location + `:`
+      ? ansarray.splice(ansarray.indexOf(el))
+      : console.log("gresit")
+  );
 };
-
-
 
 const goNext = function () {
   const vari = "q" + model.state.location;
-  
+
   const response = document.querySelectorAll(
     `input[name="q${model.state.location}[]"]`
   );
@@ -78,15 +85,22 @@ const goNext = function () {
   response.forEach(function retrive(res) {
     if (model.state.type === "radio" || model.state.type === "checkbox") {
       res.checked ? ansarray.push(`q${model.state.location}:${res.value}`) : ``;
-    
     }
     if (res.dataset.extra === "y") {
       ansarray.push(`q${model.state.location}:${res.value}`);
     }
-    if (model.state.type === "text" || model.state.type === "mixed") {
+    if (
+      model.state.type === "text" ||
+      model.state.type === "mixed" ||
+      model.state.type === "color"
+    ) {
       res.value ? ansarray.push(`q${model.state.location}:${res.value}`) : ``;
     }
-    
+    if (res.dataset.extra === "file") {
+      console.log(res);
+      console.log(res.parentElement.parentElement.parentElement);
+      document.getElementById("finp").appendChild(res);
+    }
   });
 
   select.forEach(function retrieveSel(sel) {
@@ -98,6 +112,9 @@ const goNext = function () {
   model.getQInfo(`${Number(model.state.location) + 1}`);
   questionView.render(model.state.currentQuestion);
   updLocation();
+  if (Number(model.state.location) === Number(model.qNo)) {
+    displayButFin();
+  }
 };
 
 const updLocation = function () {
@@ -112,9 +129,11 @@ const init = function () {
   questionView.addHandlerSelect(displayBut);
   questionView.addHandlerText(displayBut, hideButton);
   questionView.addHandlerCheckbox(displayButCheck);
+  questionView.addHandlerFile(displayBut);
+  questionView.addHandlerColor(displayBut);
   questionView.addHandlerBack(goBack);
   questionView.addHandlerNext(goNext);
-
   initialView.addHandlerNext(goNext);
+  document.getElementById("qno").value = model.qNo;
 };
 init();

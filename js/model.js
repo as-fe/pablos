@@ -1,4 +1,4 @@
-
+// "use strict";
 import { questions } from "./questions.js";
 
 export const state = {

@@ -27,9 +27,9 @@ echo $totalcomms;
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Dashboard</title>
+    <title>Survey app - Dashboard</title>
     <meta charset="UTF-8">
-<meta name="Language" content="ro">
+<meta name="Language" content="en">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
      <link rel="stylesheet" href="css/pablos.css" type="text/css">
@@ -39,14 +39,14 @@ echo $totalcomms;
     
 </head>
 <body>
-<a href="index.php" class="sigla"><img src="foto/logo.png" alt="sigla" class="fullimg"/></a>
+<a href="index.php" class="sigla"><img src="foto/logo.png" alt="sigla magazin online offroad" class="fullimg"/></a>
  
 <div class="full oh panou " id="raspuns" data-name="fin">
 <h1 class="center">Hello</h1>
-	   <p class="center">Answers:</p>
+	   <p class="center">Responses:</p>
 <p class="cod"><?php htmlentities(totalcomp()); ?></p>
 
-<p class="center">Subscribes:</p>
+<p class="center">Newsletter signups:</p>
 <p class="cod"><?php htmlentities(totalinsc()); ?></p>
 
 <a class="butonadmin" href="logout.php"> Logout</a>

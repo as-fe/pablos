@@ -4,8 +4,8 @@ body {
   margin: 0;
 }
 .sigla {
-  width: 20%;
-  margin: 2% 40%;
+  width: 15%;
+  margin: 0 auto;
   display: block;
 }
 a {
@@ -24,7 +24,7 @@ a {
   background-color: #fff;
   border-radius: 35px;
   width: 80%;
-  margin: 5% 10% 10% 10%;
+  margin: 2% 10% 10% 10%;
   padding: 5% 10%;
   box-sizing: border-box;
 }
@@ -181,6 +181,18 @@ select {
 .center {
   width: 100%;
   text-align: center;
+}
+
+.fileinput--styler {
+  margin: 5% auto;
+}
+
+::-webkit-file-upload-button {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #333;
+  color: #333;
+  font-family: "Montserrat", sans-serif;
 }
 @media only screen and (max-width: 768px) {
   .half {

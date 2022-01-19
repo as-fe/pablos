@@ -2,7 +2,7 @@
 session_start();
 require_once('includes/dB.php');
 require_once('includes/functions.php');
- $mesaj="test";
+ $mesaj="";
 if(isset($_SESSION["user_id"])) {
 Redirect_to("dashboard.php");
 }else {
@@ -11,15 +11,15 @@ $usern=$_POST["usern"];
 $pass=$_POST["pass"];
 
 if (empty($usern)||empty($pass)) {
-	Redirect_to("login.php");
-$mesaj="trebuie sa completati campurile";
+	
+$mesaj="Fields can not be empty";
 }else {
 	$founda=login_attempt($usern, $pass);
 	if($founda) {
 		$_SESSION["user_id"]=$founda["id_admin"];
 		Redirect_to("dashboard.php");
 	}else {
-		$mesaj="db problem";
+		$mesaj="There has been a problem, try again later";
 		Redirect_to("login.php");
 		
 	}
@@ -34,7 +34,7 @@ $mesaj="trebuie sa completati campurile";
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Login</title>
+    <title>Survey app - Login</title>
     <meta charset="UTF-8">
 <meta name="Language" content="ro">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,11 +46,11 @@ $mesaj="trebuie sa completati campurile";
     
 </head>
 <body>
-<a href="index.php" class="sigla"><img src="foto/logo.png" alt="sigla" class="fullimg"/></a>
+<a href="index.php" class="sigla"><img src="foto/logo.png" alt="sigla magazin online offroad" class="fullimg"/></a>
  
 <div class="full oh panou " id="raspuns" data-name="fin">
-<h4>Welcome back!</h4>
-
+<h4>Welcome back</h4>
+<span style="color:red"><?php echo $mesaj; ?></span>
 <form method="POST">
 
 <label for="usern"><span class="fieldinfo">Username:</span></label>

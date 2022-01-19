@@ -37,7 +37,8 @@ class QuestionView extends View {
     if (
       data.type === "radio" ||
       data.type === "text" ||
-      data.type === "checkbox"
+      data.type === "checkbox" ||
+      data.type === "color"
     ) {
       data.options.forEach((opt) => {
         optArr.push(
@@ -50,9 +51,21 @@ class QuestionView extends View {
 
       if (data.type === "checkbox") {
         optArr.push(
-          `<input type="text" name="q${data.panel}[]" class="text full" data-name="q${data.panel}" data-extra="y" placehloder="Something else" /> `
+          `<input type="text" name="q${data.panel}[]" class="text full" data-name="q${data.panel}" data-extra="y" placehloder="Alta optiune" /> `
         );
       }
+      return optArr.join(" ");
+    }
+
+    if (data.type === "fileupl") {
+      optArr.push(
+        `<div class="full"> <input type="radio" name="q${data.panel}[]" data-clasificare="insq${data.panel}" class="${data.type} file" data-name="q${data.panel}" data-extra="yes" value="1" /> 
+        <label for="q${data.panel}" data-name="q${data.panel}" >Da</label> </div> 
+        <div class="full fileinput--styler hidden">  <input type="file" name="q${data.panel}[]" class="file full " data-name="q${data.panel}" data-extra="file"  /></div>
+        <div class="full">
+      <input type="radio" name="q${data.panel}[]" data-clasificare="insq${data.panel}" class="${data.type} file" data-name="q${data.panel}" value="0"  data-extra="no"/> 
+          <label for="q${data.panel}" data-name="q${data.panel}" >Nu</label> </div> `
+      );
       return optArr.join(" ");
     }
 
@@ -66,7 +79,7 @@ class QuestionView extends View {
         optArr.push(
           `<div class="full">
           <label class="full db">${que.label}</label>
-              <input type="text" name="q${data.panel}[]" data-name="q${data.panel}" class="text full" placehloder="Something else" /></div> `
+              <input type="text" name="q${data.panel}[]" data-name="q${data.panel}" class="text full" placehloder="Alta optiune" /></div> `
         );
       });
 
@@ -93,13 +106,13 @@ class QuestionView extends View {
       Number(data.panel) + 1
     }" data-name="q${Number(data.panel) + 1}"  data-clasificare="insq${
       data.panel
-    }">Next question</button>
+    }">Pasul urmator</button>
    `;
   }
 
   _renderButtonFin(data) {
     return `
-    <button type="submit" name="submitfin" class="butonfinal disabled hidden"  data-name="fin"  data-clasificare="insq${data.panel}">Send your responses <img src="foto/next.png" alt="trimite" /></button>
+    <button type="submit" name="submitfin" class="butonfinal disabled hidden"  data-name="fin"   data-clasificare="insq${data.panel}">Trimite raspunsurile <img src="foto/next.png" alt="trimite" /></button>
    `;
   }
 
@@ -145,6 +158,22 @@ class QuestionView extends View {
   addHandlerSelect(handler) {
     this._parentElement.addEventListener("click", function (e) {
       if (e.target && e.target.classList.contains("select")) {
+        handler();
+      }
+    });
+  }
+
+  addHandlerFile(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      if (e.target && e.target.classList.contains("file")) {
+        handler();
+      }
+    });
+  }
+
+  addHandlerColor(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      if (e.target && e.target.classList.contains("color")) {
         handler();
       }
     });

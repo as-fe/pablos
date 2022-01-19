@@ -1,11 +1,18 @@
 <?php
 require_once("dB.php");
 
+/*
+Redirects to given location
+@param $new_location - destination of redirect
+*/
+
 function Redirect_to($new_location) {
 	header("location:".$new_location);
 	exit;
 }
-
+/*
+Checks if user exists in the admin table and returns true or false based on result
+*/
 function checkuserexist($usern) {
 	global $connectdb;
 	$sql="SELECT username FROM admins WHERE username=:userN";
@@ -15,10 +22,14 @@ function checkuserexist($usern) {
 	$result=$stmt->rowcount();
 	if($result==1) {
 		return true;
-	}else
-	{return false;
+	}else	{
+		return false;
 	}
-}
+}  
+
+/*
+Checks if username and password match in the dB and returns the values to be passed to the session cookie, otherwise returns null
+*/
 
 function login_attempt($usern, $pass){
 	global $connectdb;
@@ -34,7 +45,9 @@ function login_attempt($usern, $pass){
 		return null;
 	}
 }
-
+/*
+Function to protect the dashboard from unauthorized access - returns true if session cookie exists or redirects to login page
+*/
 function confirm_log(){
 	if(isset($_SESSION["user_id"])){
 		return true;
