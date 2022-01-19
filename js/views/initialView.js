@@ -24,7 +24,7 @@ class InitialView extends View {
 
   _renderButton() {
     return `
-    <a class="butonnext" id="toq1" data-name="q1">Sa incepem</a>
+    <a class="butonnext" id="toq1" data-name="q1">Let's get started</a>
    `;
   }
 
