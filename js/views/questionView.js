@@ -60,11 +60,11 @@ class QuestionView extends View {
     if (data.type === "fileupl") {
       optArr.push(
         `<div class="full"> <input type="radio" name="q${data.panel}[]" data-clasificare="insq${data.panel}" class="${data.type} file" data-name="q${data.panel}" data-extra="yes" value="1" /> 
-        <label for="q${data.panel}" data-name="q${data.panel}" >Da</label> </div> 
+        <label for="q${data.panel}" data-name="q${data.panel}" >Yes</label> </div> 
         <div class="full fileinput--styler hidden">  <input type="file" name="q${data.panel}[]" class="file full " data-name="q${data.panel}" data-extra="file"  /></div>
         <div class="full">
       <input type="radio" name="q${data.panel}[]" data-clasificare="insq${data.panel}" class="${data.type} file" data-name="q${data.panel}" value="0"  data-extra="no"/> 
-          <label for="q${data.panel}" data-name="q${data.panel}" >Nu</label> </div> `
+          <label for="q${data.panel}" data-name="q${data.panel}" >No</label> </div> `
       );
       return optArr.join(" ");
     }
@@ -79,7 +79,7 @@ class QuestionView extends View {
         optArr.push(
           `<div class="full">
           <label class="full db">${que.label}</label>
-              <input type="text" name="q${data.panel}[]" data-name="q${data.panel}" class="text full" placehloder="Alta optiune" /></div> `
+              <input type="text" name="q${data.panel}[]" data-name="q${data.panel}" class="text full" placehloder="Something else" /></div> `
         );
       });
 
@@ -112,7 +112,7 @@ class QuestionView extends View {
 
   _renderButtonFin(data) {
     return `
-    <button type="submit" name="submitfin" class="butonfinal disabled hidden"  data-name="fin"   data-clasificare="insq${data.panel}">Trimite raspunsurile <img src="foto/next.png" alt="trimite" /></button>
+    <button type="submit" name="submitfin" class="butonfinal disabled hidden"  data-name="fin"   data-clasificare="insq${data.panel}">Send responses <img src="foto/next.png" alt="trimite" /></button>
    `;
   }
 
