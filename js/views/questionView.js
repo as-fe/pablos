@@ -106,7 +106,7 @@ class QuestionView extends View {
       Number(data.panel) + 1
     }" data-name="q${Number(data.panel) + 1}"  data-clasificare="insq${
       data.panel
-    }">Pasul urmator</button>
+    }">Next question</button>
    `;
   }
 
