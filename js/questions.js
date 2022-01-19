@@ -3,10 +3,10 @@
 export const questions = [
   {
     panel: "0",
-    title: "Chestionar initial",
+    title: "Survey app",
     content:
-      "Rolul chestionarului este de a stabili preferintele si directiile de personalizare pentru website-ul dumneavoastra. Acesta contine 12 intrebari si poate fi completat in duoar cateva minute. In cazul in care aveti intrebari sau neclaritati, nu ezitati sa ne contactati!",
-    em: "",
+      "Here you can write a few words for the respondents.",
+    em: "And also there is emphasized content",
   },
   {
     panel: "1",
